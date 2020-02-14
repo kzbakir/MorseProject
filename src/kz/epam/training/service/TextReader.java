@@ -11,7 +11,7 @@ public class TextReader {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filepath));
             line = reader.readLine();
-            return line;
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

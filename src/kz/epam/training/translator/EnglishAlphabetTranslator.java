@@ -1,6 +1,12 @@
 package kz.epam.training.translator;
 
-public class EnglishAlphabetTranslator implements Translatable {
+import kz.epam.training.service.Runnable;
+import kz.epam.training.service.TextReader;
+import kz.epam.training.service.TextWriter;
+
+public class EnglishAlphabetTranslator implements Translatable, Runnable {
+    private TextReader textReader = new TextReader();
+    private TextWriter textWriter = new TextWriter();
     private char[] englishAlphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
             'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
             'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
@@ -10,6 +16,10 @@ public class EnglishAlphabetTranslator implements Translatable {
             "...", "-", "..-", "...-", ".--", " -..-", "-.--", "--..", ".----",
             "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----.",
             "-----", "--..--", ".-.-.-", "..--.."};
+
+    public String translateToEnglish(String text) {
+        return null;
+    }
 
     @Override
     public String translateToMorse(String text) {
@@ -26,8 +36,14 @@ public class EnglishAlphabetTranslator implements Translatable {
         return translatedText;
     }
 
-    public String translateToEnglish(String text) {
-       return null;
+    @Override
+    public void runTranslator(String filePathForRead, String filePathForWrite) {
+        System.out.println("Процесс перевода из английского в морзе");
+        String text = textReader.readText(filePathForRead);
+        System.out.println("Текст из файла: "+ text);
+        System.out.println("Переведенный текст: "+ translateToMorse(text));
+        textWriter.writeText(translateToMorse(text),filePathForWrite);
+        System.out.println("Ваш переведенный тест успешно сохранен в файле");
     }
 }
 
